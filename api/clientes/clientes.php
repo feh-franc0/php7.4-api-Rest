@@ -6,15 +6,18 @@ if ($api == 'clientes') {
     include_once "get.php";
   }
   
-  if ($method == "POST") {
-    include_once "post.php";
-  }
+  if (Usuarios::verificar()) {
+    if ($method == "POST" && !isset($_POST['_method'])) {
+      include_once "post.php";
+    }
 
-  if ($method == "POST" && $_POST['_method'] == "PUT") {
-    include_once "put.php";
-  }
+    if ($method == "POST" && isset($_POST['_method']) && $_POST['_method'] == "PUT") {
+      include_once "put.php";
+    }
 
-  if ($method == "POST" && $_POST['_method'] == "DELETE") {
-    include_once "delete.php";
+    if ($method == "POST" && isset($_POST['_method']) && $_POST['_method'] == "DELETE") {
+      include_once "delete.php";
+    }
   }
+  
 }
